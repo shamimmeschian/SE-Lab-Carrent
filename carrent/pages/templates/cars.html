@@ -1,0 +1,98 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Available Cars - Carrent</title>
+<link rel="stylesheet" href="../static/css/carsstyle.css">
+	
+</head>
+
+<body>
+	<header>
+		<nav class="menu">
+			<div class="logo">
+				<a href="home">
+					<img src="../static/img/logo.png" alt="carrent logo">
+				</a>
+			</div>
+			<ul class="menu-links">
+				<li><a href="home">Home</a></li>
+      			<li><a href="cars">Cars</a></li>
+      			<li><a href="reserve">My Reservations</a></li>
+      			<li><a href="contact">Contact</a></li>
+      			<li class="dropdown">
+  					<a href="#" class="dropbtn">Account ▾</a>
+  					<ul class="dropdown-menu">
+    					{% if request.session.client_id %}
+        					<li>
+            					<a href="{% url 'logout' %}">Logout</a>
+        					</li>
+   						 {% else %}
+        					<li>
+            					<a href="{% url 'login' %}">Login</a>
+        					</li>
+    					{% endif %}
+  					</ul>
+		</nav>
+	</header>
+	<section class="cars">
+		<h2>Available Cars</h2>
+		<div class="car-list">
+			<div class="car-card">
+				<img src="../static/img/corella.png" alt="Toyota Corolla">
+				<h3>Toyota Corolla</h3>
+				<p>Price: $45/day</p>
+				<p>Fuel: Petrol</p>
+				<p>Transmission: Automatic</p>
+				<p>Capacity: 5 seats</p>
+				<a href="booking" class="btn">Book Now</a>
+			</div>
+			<div class="car-card">
+				<img src="../static/img/sportage.png" alt="Kia Sportage">
+				<h3>Kia Sportage</h3>
+				<p>Price: $60/day</p>
+				<p>Fuel: Diesel</p>
+				<p>Transmission: Automatic</p>
+				<p>Capacity: 5 seats</p>
+				<a href="booking" onclick="selectCar('Toyota Corolla - $45/day')" class="btn">Book Now</a>
+			</div>
+			<div class="car-card">
+				<img src="../static/img/civic.png" alt="Honda Civic">
+				<h3>Honda Civic</h3>
+				<p>Price: $50/day</p>
+				<p>Fuel: Petrol</p>
+				<p>Transmission: Manual</p>
+				<p>Capacity: 5 seats</p>
+				<a href="booking" class="btn">Book Now</a>
+			</div>	
+		</div>
+	</section>
+	<footer class="footer">
+		<div class="footer-container">
+			<div class="footer-about">
+				<h2>Carrent</h2>
+				<p>Your trusted partner for easy and reliable car rentals.<br> 
+      				Find your perfect ride anytime, anywhere!</p>
+			</div>
+			<div class="footer-links">
+				<h4>Quick Links</h4>
+				<ul>
+        			<li><a href='home'>Home</a></li>
+        			<li><a href="cars">Cars</a></li>
+        			<li><a href="reserve">My Reservations</a></li>
+        			<li><a href="contact">Contact</a></li>
+				</ul>
+			</div>
+			<div class="footer-contact">
+				<h4>Contact Us</h4>
+				<p>Email: support@carrent.com</p>
+      			<p>Phone: +1 234 567 890</p>
+			</div>
+		</div>
+		<div class="footer-bottom">
+    		<p>&copy; 2025 CarRent. All rights reserved.</p>
+  		</div>
+	</footer>	
+</body>
+</html>

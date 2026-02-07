@@ -1,0 +1,95 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Register - Carrent</title>
+<link rel="stylesheet" href="/static/css/registerstyle.css">
+
+</head>
+
+<body>
+	<header>
+		<nav class="menu">
+			<div class="logo">
+				<a href="home">
+					<img src="../static/img/logo.png" alt="carrent logo">
+				</a>
+			</div>
+			<ul class="menu-links">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'cars' %}">Cars</a></li>
+				<li><a href="{% url 'reserve' %}">My Reservations</a></li>
+				<li><a href="{% url 'contact' %}">Contact</a></li>
+      			<li class="dropdown">
+				</li>
+			</ul>
+		</nav>
+	</header>
+	
+	<section class="register-section">
+		<h2>Create Your Account</h2>
+		
+		<!-- نمایش خطا اگر وجود داشته باشد -->
+		{% if error %}
+		<div class="error-message" style="color: red; background: #ffe6e6; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+			⚠️ {{ error }}
+		</div>
+		{% endif %}
+		
+		<form class="register-form" method="POST" action="{% url 'register_submit' %}">
+			{% csrf_token %}
+			
+			<div class="form-group">
+				<label for="fullname">Full Name</label>
+				<input type="text" id="fullname" name="name" placeholder="Enter your Full Name" required>
+			</div>
+			<div class="form-group">
+				<label for="email">E-mail</label>
+				<input type="email" id="email" name="email" placeholder="Enter your Email" required>
+			</div>
+			<div class="form-group">
+				<label for="phone">Phone Number</label>
+				<input type="tel" id="phone" name="phone" placeholder="0912-000-0000" required>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" id="password" name="password" placeholder="Create Password">
+			</div>
+			<div class="form-group">
+				<label for="confirm">Confirm Password</label>
+				<input type="password" id="confirm" name="confirm_password" placeholder="Re-enter Password" required>
+			</div>
+			<button type="submit" class="register-btn">Register</button>
+			<p class="login-text">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+		</form>
+	</section>
+	
+	<footer class="footer">
+		<div class="footer-container">
+			<div class="footer-about">
+				<h2>Carrent</h2>
+				<p>Your trusted partner for easy and reliable car rentals.<br> 
+      				Find your perfect ride anytime, anywhere!</p>
+			</div>
+			<div class="footer-links">
+				<h4>Quick Links</h4>
+				<ul>
+        			<li><a href='home'>Home</a></li>
+        			<li><a href="cars">Cars</a></li>
+        			<li><a href="reserve">My Reservations</a></li>
+        			<li><a href="contact">Contact</a></li>
+				</ul>
+			</div>
+			<div class="footer-contact">
+				<h4>Contact Us</h4>
+				<p>Email: support@carrent.com</p>
+      			<p>Phone: +1 234 567 890</p>
+			</div>
+		</div>
+		<div class="footer-bottom">
+    		<p>&copy; 2025 CarRent. All rights reserved.</p>
+  		</div>
+	</footer>
+</body>
+</html>

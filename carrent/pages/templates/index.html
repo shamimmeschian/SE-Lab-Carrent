@@ -1,0 +1,82 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Home - Carrent</title>
+<link rel="stylesheet" href="../static/css/indexstyle.css">
+</head>
+<body>
+	<header>
+		<nav class="menu">
+			<div class="logo">
+				<a href="">
+					<img src="../static/img/logo.png" alt="carrent logo">
+				</a>
+			</div>
+			<ul class="menu-links">
+				<li><a href="">Home</a></li>
+      			<li><a href="cars">Cars</a></li>
+      			<li><a href="reserve">My Reservations</a></li>
+      			<li><a href="contact">Contact</a></li>
+      			<li class="dropdown">
+  					<a href="#" class="dropbtn">Account ▾</a>
+  					<ul class="dropdown-menu">
+    					{% if request.session.client_id %}
+        					<li>
+            					<a href="{% url 'logout' %}">Logout</a>
+        					</li>
+   						 {% else %}
+        					<li>
+            					<a href="{% url 'login' %}">Login</a>
+        					</li>
+    					{% endif %}
+  					</ul>
+				</li>
+
+			</ul>
+		</nav>
+	</header>
+	<section class="hero">
+		<div class="hero-text">
+			<h1>Find Your Perfect Ride</h1>
+			<a href="cars" class="btn">Book Now!</a>
+		</div>
+	</section>
+	<section class="benefits">
+		<h2>Why Us?</h2>
+		<ul>
+    		<li> Best price guarantee</li>
+    		<li> 24/7 support</li>
+    		<li> Fast & secure booking</li>
+		</ul>
+	</section>
+	<footer class="footer">
+		<div class="footer-container">
+			<div class="footer-about">
+				<h2>Carrent</h2>
+				<p>Your trusted partner for easy and reliable car rentals.<br> 
+      				Find your perfect ride anytime, anywhere!</p>
+			</div>
+			<div class="footer-links">
+				<h4>Quick Links</h4>
+				<ul>
+        			<li><a href=''>Home</a></li>
+        			<li><a href="cars">Cars</a></li>
+        			<li><a href="reserve">My Reservations</a></li>
+        			<li><a href="contact">Contact</a></li>
+				</ul>
+			</div>
+			<div class="footer-contact">
+				<h4>Contact Us</h4>
+				<p>Email: support@carrent.com</p>
+      			<p>Phone: +1 234 567 890</p>
+			</div>
+		</div>
+		<div class="footer-bottom">
+    		<p>&copy; 2025 CarRent. All rights reserved.</p>
+  		</div>
+	</footer>
+
+</body>
+</html>

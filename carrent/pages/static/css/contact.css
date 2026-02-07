@@ -1,0 +1,144 @@
+@charset "utf-8";
+body {
+  	margin: 0;
+ 	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+h1, h2, h3 {
+  	font-family: 'Montserrat', sans-serif;
+}
+
+.menu{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 30px;
+	background-color: #FF4C00;
+	color: black;
+}
+.menu .logo img {
+  	height: 50px;      
+  	width: auto;        
+  	display: block;
+}
+.menu-links {
+  	list-style: none;
+  	display: flex;
+  	gap: 30px;
+}
+.menu-links li a {
+  	text-decoration: none;
+	color: black;
+  	font-size: 17px;
+  	transition: color 0.3s;
+}
+.menu-links li a:hover {
+  color: white; 
+}
+/* dropdown container */
+.dropdown {
+  position: relative;
+}
+
+/* dropdown menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  list-style: none;
+  padding: 10px 0;
+  min-width: 160px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  display: none;
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  padding: 8px 20px;
+}
+
+.dropdown-menu li a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #fff5e6;
+  color: #FF4C00;
+}
+
+/* hover برای باز شدن */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.contact-section{
+	max-width: 1000px;
+	margin: 50px auto;
+	padding: 20px;
+}
+.contact-section h2{
+	text-align: center;
+	margin-bottom: 40px;
+}
+.contact-container{
+	display: flex;
+	gap: 40px;
+	flex-wrap: wrap;
+}
+
+.contact-form{
+	flex: 1;
+	padding: 25px;
+	border-radius: 10px;
+	box-shadow: 0 0 15px rgba(0,0,0,0.1);
+	
+}
+.form-group{
+	margin-bottom: 15px;
+}
+label{
+	display: block;
+	margin-bottom: 6px;
+	font-weight: bold;
+}
+input, textarea{
+	width: 95%;
+	padding: 10px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+}
+.contact-info{
+	flex: 1;
+	background: #fff5e6;
+	padding: 25px;
+	border-radius: 10px;
+}
+.contact-info h3{
+	color: #ff4c00;
+	margin-bottom: 15px;
+}
+
+.btn{
+	width: 100%;
+	padding: 12px;
+	border: none;
+	border-radius: 25px;
+	background: #ff4c00;
+	font-weight: bold;
+	cursor: pointer;
+}
+.btn:hover{
+	color: white;
+}
+.footer{
+	background: black;
+	color: white;
+	text-align: center;
+	padding: 15px;
+	margin-top: 50px;
+}

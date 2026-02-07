@@ -1,0 +1,73 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>My Reservations - Carrent</title>
+<link rel="stylesheet" href="{% static 'css/my-reservation.css' %}">
+</head>
+
+<body>
+<header>
+    <nav class="menu">
+        <div class="logo">
+            <a href="/home">
+                <img src="{% static 'img/logo.png' %}" alt="carrent logo">
+            </a>
+        </div>
+        <ul class="menu-links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/cars">Cars</a></li>
+            <li><a href="/reserve">My Reservations</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="reservation-sec">
+    <h2>My Reservations</h2>
+
+    {% if reservations %}
+        {% for r in reservations %}
+        <div class="reservation-card">
+            <img src="{% static 'img/images.jpg' %}" alt="car">
+
+            <div class="details">
+                <h3>{{ r.car.model }}</h3>
+
+                <p><strong>Pick-up:</strong> {{ r.start_date }}</p>
+                <p><strong>Return:</strong> {{ r.end_date }}</p>
+                <p><strong>Total:</strong> ${{ r.total_price }}</p>
+
+                <p class="status {{ r.status }}">
+                    Status: {{ r.status|title }}
+                </p>
+
+                <div class="actions">
+                    {% if r.status != 'cancelled' and r.status != 'completed' %}
+                        <a href="{% url 'edit' r.id %}" class="btn edit">Edit</a>
+                        <a href="{% url 'cancel_reservation' r.id %}" class="btn cancel">
+    						Cancel
+						</a>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No reservations found.</p>
+    {% endif %}
+</section>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>Carrent</h2>
+            <p>Your trusted partner for easy and reliable car rentals.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

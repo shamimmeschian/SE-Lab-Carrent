@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>succession</title>
+<link rel="stylesheet" href="{% static 'css/success.css' %}">
+</head>
+
+<body>
+	<header>
+		<nav class="menu">
+			<div class="logo">
+				<a href="home">
+					<img src="{% static 'img/logo.png' %}" alt="carrent logo">
+				</a>
+			</div>
+			<ul class="menu-links">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'cars' %}">Cars</a></li>
+				<li><a href="{% url 'reserve' %}">My Reservations</a></li>
+				<li><a href="{% url 'contact' %}">Contact</a></li>
+      			<li class="dropdown">
+  					<a href="#" class="dropbtn">Account ▾</a>
+  					<ul class="dropdown-menu">
+    					<li><a href="login">Login</a></li>
+    					<li><a href="#" onclick="logout()">Logout</a></li>
+  					</ul>
+				</li>
+
+			</ul>
+		</nav>
+	</header>
+	<section class="success-section">
+		<h2 class="success-title">Reservation Confirmed!</h2>
+		<p>Your reservation has been successfully submitted.</p>
+	
+  	<div class="reservation-summary">
+    	<p><strong>Car:</strong> {{ reservation.car.model }}</p>
+		<p><strong>Number of Days:</strong> {{ reservation.total_days }}</p>
+		<p><strong>Total Price:</strong> ${{ reservation.total_price }}</p>
+		<p><strong>Status:</strong> {{ reservation.status }}</p>
+  	</div>
+	<a href="{% url 'home' %}" class="btn">Back to Home</a>
+	</section>
+</body>
+</html>

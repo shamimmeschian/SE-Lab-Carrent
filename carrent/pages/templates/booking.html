@@ -1,0 +1,122 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{% if is_edit %}Edit Reservation{% else %}Book Your Car{% endif %} - Carrent</title>
+<link rel="stylesheet" href="{% static 'css/bookingstyle.css' %}">
+</head>
+
+<body>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert {{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+	<header>
+		<nav class="menu">
+			<div class="logo">
+				<a href="{% url 'home' %}">
+					<img src="{% static 'img/logo.png' %}" alt="carrent logo">
+				</a>
+			</div>
+			<ul class="menu-links">
+				<li><a href="{% url 'home' %}">Home</a></li>
+      			<li><a href="{% url 'cars' %}">Cars</a></li>
+      			<li><a href="{% url 'reserve' %}">My Reservations</a></li>
+      			<li><a href="{% url 'contact' %}">Contact</a></li>
+      			<li class="dropdown">
+  					<a href="#" class="dropbtn">Account ▾</a>
+  					<ul class="dropdown-menu">
+    					{% if request.session.client_id %}
+        					<li>
+            					<a href="{% url 'logout' %}">Logout</a>
+        					</li>
+   						 {% else %}
+        					<li>
+            					<a href="{% url 'login' %}">Login</a>
+        					</li>
+    					{% endif %}
+  					</ul>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+	<section class="booking-section">
+		<h2>
+			{% if is_edit %}Edit Reservation{% else %}Car Reservation Form{% endif %}
+		</h2>
+
+		<form class="booking-form" method="POST"
+			  action="{% if is_edit %}{% url 'edit_submit' reservation.id %}{% else %}{% url 'confirm' %}{% endif %}">
+			{% csrf_token %}
+
+			<!-- فقط در حالت رزرو نمایش ماشین -->
+			{% if not is_edit %}
+			<div class="form-group">
+				<label for="car">Select Car</label>
+				<select id="car" name="car_id" required>
+					<option value="">-- choose car --</option>
+					{% for car in cars %}
+					<option value="{{ car.id }}">{{ car.model }} - ${{ car.price_per_day }}/day</option>
+					{% endfor %}
+				</select>
+			</div>
+			{% else %}
+			<!-- در حالت ادیت فقط نمایش اطلاعات ماشین -->
+			<div class="form-group">
+				<label>Car</label>
+				<input type="text" value="{{ reservation.car.model }} - ${{ reservation.car.price_per_day }}/day" readonly>
+			</div>
+			{% endif %}
+			
+			<div class="form-group">
+				<label for="pickup">Pickup Date</label>
+				<input type="date" id="pickup" name="start_date" required
+					   value="{% if is_edit %}{{ reservation.start_date|date:'Y-m-d' }}{% endif %}">
+			</div>
+			
+			<div class="form-group">
+				<label for="return">Return Date</label>
+				<input type="date" id="return" name="end_date" required
+					   value="{% if is_edit %}{{ reservation.end_date|date:'Y-m-d' }}{% endif %}">
+			</div>
+			
+			<button type="submit" class="submit-btn">
+				{% if is_edit %}Update Dates{% else %}Reserve Now{% endif %}
+			</button>
+		</form>
+	</section>
+
+	<footer class="footer">
+		<div class="footer-container">
+			<div class="footer-about">
+				<h2>Carrent</h2>
+				<p>Your trusted partner for easy and reliable car rentals.<br> 
+      				Find your perfect ride anytime, anywhere!</p>
+			</div>
+			<div class="footer-links">
+				<h4>Quick Links</h4>
+				<ul>
+        			<li><a href='{% url "home" %}'>Home</a></li>
+        			<li><a href="{% url 'cars' %}">Cars</a></li>
+        			<li><a href="{% url 'reserve' %}">My Reservations</a></li>
+        			<li><a href="{% url 'contact' %}">Contact</a></li>
+				</ul>
+			</div>
+			<div class="footer-contact">
+				<h4>Contact Us</h4>
+				<p>Email: support@carrent.com</p>
+      			<p>Phone: +1 234 567 890</p>
+			</div>
+		</div>
+		<div class="footer-bottom">
+    		<p>&copy; 2025 CarRent. All rights reserved.</p>
+  		</div>
+	</footer>
+</body>
+</html>

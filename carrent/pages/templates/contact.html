@@ -1,0 +1,84 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Contact - Carrent</title>
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+</head>
+
+<body>
+	<header>
+		<nav class="menu">
+			<div class="logo">
+				<a href="{% url 'home' %}">
+					<img src="{% static 'img/logo.png' %}" alt="carrent logo">
+				</a>
+			</div>
+			<ul class="menu-links">
+				<li><a href="{% url 'home' %}">Home</a></li>
+      			<li><a href="{% url 'cars' %}">Cars</a></li>
+      			<li><a href="{% url 'reserve' %}">My Reservations</a></li>
+      			<li><a href="{% url 'contact' %}">Contact</a></li>
+      			<li class="dropdown">
+  					<a href="#" class="dropbtn">Account ▾</a>
+  					<ul class="dropdown-menu">
+    					{% if request.session.client_id %}
+    						<li><a href="{% url 'logout' %}">Logout</a></li>
+    					{% else %}
+    						<li><a href="{% url 'login' %}">Login</a></li>
+    					{% endif %}
+  					</ul>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+	<section class="contact-section">
+		<h2>Contact Us</h2>
+		<div class="contact-container">
+			<form class="contact-form" method="post">
+				{% csrf_token %}
+				
+				<div class="form-group">
+					<label>Full Name</label>
+					<input type="text" name="name" placeholder="Your name"
+						   value="{{ name|default:'' }}"
+						   {% if name %}readonly{% endif %} required>
+				</div>
+				
+				<div class="form-group">
+					<label>Email</label>
+					<input type="email" name="email" placeholder="Your email"
+						   value="{{ email|default:'' }}"
+						   {% if email %}readonly{% endif %} required>
+				</div>
+				
+				<div class="form-group">
+					<label>Message</label>
+					<textarea name="message" rows="5" placeholder="Your message..." required></textarea>
+				</div>
+				
+				<button type="submit" class="btn">Send Message</button>
+
+				{% if success %}
+					<p class="success">{{ success }}</p>
+				{% elif error %}
+					<p class="error">{{ error }}</p>
+				{% endif %}
+			</form>
+
+			<div class="contact-info">
+				<h3>Get in Touch</h3>
+				<p>Email: support@carrent.com</p>
+				<p>Phone: +1 234 567 890</p>
+				<p>Working Hours: 24/7</p>
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer">
+    	<p>&copy; 2025 Carrent. All rights reserved.</p>
+	</footer>
+</body>
+</html>
